@@ -1,0 +1,15 @@
+[Unit]
+Description=Telegram LLM bot (Ollama)
+After=ollama.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=@@PROJECT_DIR@@
+ExecStart=@@PROJECT_DIR@@/.venv/bin/python @@PROJECT_DIR@@/bot.py
+Restart=on-failure
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=default.target

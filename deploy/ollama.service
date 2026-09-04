@@ -1,0 +1,18 @@
+[Unit]
+Description=Ollama LLM server (local)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/ollama serve
+Environment=OLLAMA_HOST=127.0.0.1:11434
+Environment=OLLAMA_MAX_LOADED_MODELS=1
+Environment=OLLAMA_NUM_PARALLEL=1
+Environment=OLLAMA_KEEP_ALIVE=1h
+@@OLLAMA_EXTRA_ENV@@
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
